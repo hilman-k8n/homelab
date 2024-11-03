@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: qbittorent
+  name: qbittorrent
 spec:
-  serviceName: qbittorent
+  serviceName: qbittorrent
   replicas: 1
   selector:
     matchLabels:
-      app: qbittorent
+      app: qbittorrent
   template:
     metadata:
       labels:
-        app: qbittorent
+        app: qbittorrent
     spec:
       containers:
-      - name: qbittorent
+      - name: qbittorrent
         image: qbittorrentofficial/qbittorrent-nox:4.6.7-1
         env:
         - name: PUID
@@ -34,14 +34,14 @@ spec:
       volumes:
       - name: mnt-volume
         hostPath:
-          path: /mnt  # Path on the host
-          type: Directory  # Ensure this is a directory
+          path: /mnt
+          type: Directory
       - name: config-volume
         hostPath:
-          path: /opt/k3s/qbittorent/config  # Path on the host
-          type: Directory  # Ensure this is a directory
+          path: /opt/k3s/qbittorrent/config
+          type: Directory
       - name: downloads-volume
         hostPath:
-          path: /opt/k3s/qbittorent/downloads  # Path on the host
-          type: Directory  # Ensure this is a directory
+          path: /opt/k3s/qbittorrent/downloads
+          type: Directory
 
