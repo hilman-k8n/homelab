@@ -1,16 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: qbittorrent
+  name: httpd
 spec:
   rules:
-  - host: qbittorrent.lan  # Replace with your desired hostname
+  - host: httpd.lan
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: qbittorrent
+            name: httpd
             port:
               number: 8080
