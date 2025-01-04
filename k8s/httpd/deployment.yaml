@@ -27,5 +27,37 @@ spec:
         hostPath:
           path: /mnt/wd/www
           type: Directory
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-wd
+  labels:
+    app: httpd-wd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpd-wd
+  template:
+    metadata:
+      labels:
+        app: httpd-wd
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:2.4
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: wd
+          mountPath: /usr/local/apache2/htdocs
+      volumes:
+      - name: wd
+        hostPath:
+          path: /mnt/wd
+          type: Directory
+
 
 
