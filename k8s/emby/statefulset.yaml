@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: emby
+spec:
+  serviceName: emby
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emby
+  template:
+    metadata:
+      labels:
+        app: emby
+    spec:
+      containers:
+      - name: emby
+        image: emby/embyserver:4.9.0.35
+        env:
+        - name: UID
+          value: "1000"
+        - name: GID
+          value: "100"
+        ports:
+        - containerPort: 8096
+        volumeMounts:
+        - name: mnt-volume
+          mountPath: /mnt
+        - name: config-volume
+          mountPath: /config
+      volumes:
+      - name: mnt-volume
+        hostPath:
+          path: /mnt
+          type: Directory
+      - name: config-volume
+        hostPath:
+          path: /opt/k3s/emby/config
+          type: DirectoryOrCreate
+
