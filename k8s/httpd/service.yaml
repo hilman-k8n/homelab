@@ -17,13 +17,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: httpd-wd
+  name: httpd-mnt
   labels:
-    app: httpd-wd
+    app: httpd-mnt
 spec:
   #clusterIP: None
   selector:
-    app: httpd-wd
+    app: httpd-mnt
   ports:
   - name: httpd
     port: 8080

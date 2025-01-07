@@ -32,18 +32,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpd-wd
+  name: httpd-mnt
   labels:
-    app: httpd-wd
+    app: httpd-mnt
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: httpd-wd
+      app: httpd-mnt
   template:
     metadata:
       labels:
-        app: httpd-wd
+        app: httpd-mnt
     spec:
       containers:
       - name: httpd
@@ -51,12 +51,12 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: wd
+        - name: mnt
           mountPath: /usr/local/apache2/htdocs
       volumes:
-      - name: wd
+      - name: mnt
         hostPath:
-          path: /mnt/wd
+          path: /mnt
           type: Directory
 
 
