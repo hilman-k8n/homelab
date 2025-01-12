@@ -5,7 +5,6 @@ metadata:
   labels:
     app: emby
 spec:
-  clusterIP: None
   selector:
     app: emby
   ports:
