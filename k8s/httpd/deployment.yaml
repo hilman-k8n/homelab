@@ -52,12 +52,17 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: mnt
-          mountPath: /usr/local/apache2/htdocs
+          mountPath: /usr/local/apache2/htdocs/mnt
+        - name: downloads
+          mountPath: /usr/local/apache2/htdocs/downloads
       volumes:
       - name: mnt
         hostPath:
           path: /mnt
           type: Directory
-
+      - name: downloads
+        hostPath:
+          path: /opt/k3s/qbittorrent/downloads
+          type: Directory
 
 
