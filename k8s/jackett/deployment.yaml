@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jackett
+  labels:
+    app: jackett
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jackett
+  template:
+    metadata:
+      labels:
+        app: jackett
+    spec:
+      containers:
+      - name: jackett
+        image: linuxserver/jackett:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: jackett-config
+          mountPath: /config
+        - name: jackett-download
+          mountPath: /downloads
+      volumes:
+      - name: jackett-config
+        hostPath:
+          path: /opt/k3s/jackett/config
+          type: DirectoryOrCreate
+      - name: jackett-download
+        hostPath:
+          path: /opt/k3s/jackett/downloads
+          type: DirectoryOrCreate

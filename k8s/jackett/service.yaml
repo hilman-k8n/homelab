@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jackett
+  labels:
+    app: jackett
+spec:
+  selector:
+    app: jackett
+  ports:
+  - name: jackett
+    port: 8080
+    targetPort: 9117
