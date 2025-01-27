@@ -28,6 +28,8 @@ spec:
           mountPath: /mnt
         - name: config-volume
           mountPath: /config
+        - name: download-volume
+          mountPath: /downloads
       volumes:
       - name: mnt-volume
         hostPath:
@@ -37,4 +39,7 @@ spec:
         hostPath:
           path: /opt/k3s/emby/config
           type: DirectoryOrCreate
-
+      - name: download-volume
+        hostPath:
+          path: /opt/k3s/qbittorrent/downloads
+          type: Directory
