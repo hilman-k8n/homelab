@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: radarr
+spec:
+  serviceName: radarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+      - name: radarr
+        image: linuxserver/radarr:5.26.2.10099-ls276
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "100"
+        ports:
+        - containerPort: 7878
+        volumeMounts:
+        - name: mnt-volume
+          mountPath: /mnt
+        - name: config-volume
+          mountPath: /config
+        - name: download-volume
+          mountPath: /downloads
+      volumes:
+      - name: mnt-volume
+        hostPath:
+          path: /mnt
+          type: Directory
+      - name: config-volume
+        hostPath:
+          path: /opt/k3s/radarr/config
+          type: DirectoryOrCreate
+      - name: download-volume
+        hostPath:
+          path: /opt/k3s/qbittorrent/downloads
+          type: DirectoryOrCreate
