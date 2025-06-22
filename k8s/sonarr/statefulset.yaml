@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sonarr
+spec:
+  serviceName: sonarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - name: sonarr
+        image: linuxserver/sonarr:4.0.15.2941-ls285
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "100"
+        ports:
+        - containerPort: 8989
+        volumeMounts:
+        - name: mnt-volume
+          mountPath: /mnt
+        - name: config-volume
+          mountPath: /config
+        - name: download-volume
+          mountPath: /downloads
+      volumes:
+      - name: mnt-volume
+        hostPath:
+          path: /mnt
+          type: Directory
+      - name: config-volume
+        hostPath:
+          path: /opt/k3s/sonarr/config
+          type: DirectoryOrCreate
+      - name: download-volume
+        hostPath:
+          path: /opt/k3s/qbittorrent/downloads
+          type: DirectoryOrCreate
