@@ -13,6 +13,8 @@ spec:
       labels:
         app: emby
     spec:
+      nodeSelector:
+        node-group: nixos
       containers:
       - name: emby
         image: emby/embyserver:4.9.1.20

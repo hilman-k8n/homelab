@@ -13,6 +13,8 @@ spec:
       labels:
         app: radarr
     spec:
+      nodeSelector:
+        node-group: nixos
       containers:
       - name: radarr
         image: linuxserver/radarr:5.26.2.10099-ls276

@@ -45,6 +45,8 @@ spec:
       labels:
         app: httpd-mnt
     spec:
+      nodeSelector:
+        node-group: nixos
       containers:
       - name: httpd
         image: httpd:2.4
@@ -64,5 +66,3 @@ spec:
         hostPath:
           path: /opt/k3s/qbittorrent/downloads
           type: Directory
-
-

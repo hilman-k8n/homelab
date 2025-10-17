@@ -13,6 +13,8 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      nodeSelector:
+        node-group: nixos
       containers:
       - name: qbittorrent
         image: qbittorrentofficial/qbittorrent-nox:4.6.7-1
@@ -44,4 +46,5 @@ spec:
         hostPath:
           path: /opt/k3s/qbittorrent/downloads
           type: Directory
+
 
