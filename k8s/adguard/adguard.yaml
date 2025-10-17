@@ -43,7 +43,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: adguard
+  name: adguard-dns
 spec:
   type: NodePort
   selector:
@@ -54,12 +54,38 @@ spec:
     targetPort: 53
     nodePort: 30053
     protocol: UDP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: adguard-web
+spec:
+  selector:
+    app: adguard
+  ports:
   - name: http
     port: 80
     targetPort: 80
-    nodePort: 30080
   - name: web-ui
     port: 3000
     targetPort: 3000
-    nodePort: 30300
 
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adguard
+spec:
+  rules:
+  - host: adguard.lan
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: adguard-web
+            port:
+              number: 80
