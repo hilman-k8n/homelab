@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: static-tmp
+  labels:
+    app: static-tmp
+spec:
+  #clusterIP: None
+  selector:
+    app: static-tmp
+  ports:
+  - name: static-tmp
+    port: 8080
+    targetPort: 80
