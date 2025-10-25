@@ -81,10 +81,10 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: adguard
+  name: adguard-web
 spec:
   rules:
-  - host: minipc.lan
+  - host: adguard.lan
     http:
       paths:
       - path: /
