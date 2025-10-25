@@ -17,7 +17,7 @@ spec:
         node-group: nixos
       containers:
       - name: emby
-        image: emby/embyserver:4.9.1.20
+        image: emby/embyserver:4.9.1.80
         env:
         - name: UID
           value: "1000"
